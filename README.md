@@ -1,0 +1,3 @@
+CustomEnchanting
+==============
+Enchanting with items
