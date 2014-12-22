@@ -7,4 +7,16 @@ public class ClientProxy extends CommonProxy
     {
         super.preInit();
     }
+
+    @Override
+    public void init()
+    {
+        super.init();
+    }
+
+    @Override
+    public void postInit()
+    {
+        super.postInit();
+    }
 }

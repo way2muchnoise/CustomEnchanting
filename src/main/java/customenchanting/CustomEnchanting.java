@@ -36,11 +36,13 @@ public class CustomEnchanting
     @Mod.EventHandler
     public void init(FMLInitializationEvent event)
     {
+        PROXY.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        PROXY.postInit();
     }
 
 }
