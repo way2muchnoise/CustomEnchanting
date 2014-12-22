@@ -4,6 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import customenchanting.container.ContainerCustomEnchantmentTable;
 import customenchanting.enchant.EnchantmentRegistry;
+import customenchanting.network.MessageHandler;
+import customenchanting.network.message.MessageEnchantment;
 import customenchanting.reference.Resources;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 import customenchanting.util.TranslationHelper;
@@ -11,7 +13,6 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.model.ModelBook;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,6 +22,7 @@ import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @SideOnly(Side.CLIENT)
@@ -73,14 +75,14 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         int xMiddle = (this.width - this.xSize) / 2;
         int yMiddle = (this.height - this.ySize) / 2;
 
-        for (int j1 = 0; j1 < 3; ++j1)
+        for (int buttonId = 0; buttonId < 3; ++buttonId)
         {
-            int k1 = x - (xMiddle + 60);
-            int l1 = y - (yMiddle + 14 + 19 * j1);
+            int posX = x - (xMiddle + 60);
+            int posY = y - (yMiddle + 14 + 19 * buttonId);
 
-            if (k1 >= 0 && l1 >= 0 && k1 < 108 && l1 < 19 && this.container.enchantItem(this.mc.thePlayer, j1))
+            if (posX >= 0 && posY >= 0 && posX < 108 && posY < 19 && this.container.enchantItem(this.mc.thePlayer, buttonId))
             {
-                //TODO: packets this.mc.playerController.sendEnchantPacket(this.container.windowId, j1);
+                MessageHandler.INSTANCE.sendToServer(new MessageEnchantment(this.container.windowId, buttonId));
             }
         }
     }
@@ -154,44 +156,40 @@ public class GuiCustomEnchantmentTable extends GuiContainer
 
         if (this.currentModifier != null && this.currentStack != null)
         {
-            List<EnchantmentData> enchantments = EnchantmentRegistry.getPossibleEnchants(this.currentModifier);
-            for (int i1 = 0; i1 < 3; ++i1)
+            List<Map.Entry<Integer, EnchantmentData>> enchantments = EnchantmentRegistry.getPossibleEnchants(this.currentModifier);
+            for (int id = 0; id < 3; ++id)
             {
                 this.zLevel = 0.0F;
                 this.mc.getTextureManager().bindTexture(Resources.Gui.GUI_CUSTOM_ENCHANT);
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-                if (enchantments.size()-1-i1 >= 0)
+                int size = enchantments.size();
+
+                if (size-1-id >= 0)
                 {
-                    EnchantmentData enchantment = enchantments.get(enchantments.size() -1 - i1);
+                    EnchantmentData enchantment = enchantments.get(size-1-id).getValue();
                     String s = enchantment.enchantmentobj.getTranslatedName(enchantment.enchantmentLevel);
-                    String s1 = "";
                     int k1 = 6839882;
 
-                    if (this.mc.thePlayer.experienceLevel < i1 && !this.mc.thePlayer.capabilities.isCreativeMode)
+                    if (this.mc.thePlayer.experienceLevel < id && !this.mc.thePlayer.capabilities.isCreativeMode)
                     {
-                        this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * i1, 0, 185, 108, 19);
-                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * i1, 104, (k1 & 16711422) >> 1);
-                        k1 = 4226832;
-                        fontRendererObj.drawStringWithShadow(s1, xMiddle + 62 + 104 - fontRendererObj.getStringWidth(s1), yMiddle + 16 + 19 * i1 + 7, k1);
+                        this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 185, 108, 19);
+                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * id, 104, (k1 & 16711422) >> 1);
                     } else
                     {
                         int l1 = p_146976_2_ - (xMiddle + 60);
-                        int i2 = p_146976_3_ - (yMiddle + 14 + 19 * i1);
+                        int i2 = p_146976_3_ - (yMiddle + 14 + 19 * id);
 
                         if (l1 >= 0 && i2 >= 0 && l1 < 108 && i2 < 19)
                         {
-                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * i1, 0, 204, 108, 19);
+                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 204, 108, 19);
                             k1 = 16777088;
                         } else
                         {
-                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * i1, 0, 166, 108, 19);
+                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 166, 108, 19);
                         }
 
-                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * i1, 104, k1);
-                        fontRendererObj = this.mc.fontRenderer;
-                        k1 = 8453920;
-                        fontRendererObj.drawStringWithShadow(s1, xMiddle + 62 + 104 - fontRendererObj.getStringWidth(s1), yMiddle + 16 + 19 * i1 + 7, k1);
+                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * id, 104, k1);
                     }
                 }
             }

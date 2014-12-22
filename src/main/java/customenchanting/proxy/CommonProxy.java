@@ -6,6 +6,7 @@ import customenchanting.CustomEnchanting;
 import customenchanting.block.BlockCustomEnchantmentTable;
 import customenchanting.enchant.EnchantmentRegistry;
 import customenchanting.gui.GuiHandler;
+import customenchanting.network.MessageHandler;
 import customenchanting.reference.Blocks;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 
@@ -13,6 +14,8 @@ public class CommonProxy
 {
     public void preInit()
     {
+        MessageHandler.init();
+
         Blocks.enchantmentTable = new BlockCustomEnchantmentTable();
         GameRegistry.registerBlock(Blocks.enchantmentTable, Blocks.enchantmentTable.getUnlocalizedName());
 

@@ -3,7 +3,6 @@ package customenchanting.container;
 import customenchanting.enchant.EnchantmentRegistry;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -14,6 +13,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
+import java.util.Map;
 
 public class ContainerCustomEnchantmentTable extends Container
 {
@@ -88,20 +88,25 @@ public class ContainerCustomEnchantmentTable extends Container
         {
             if (!table.getWorldObj().isRemote)
             {
-                List<EnchantmentData> enchantments = EnchantmentRegistry.getPossibleEnchants(this.paymentInv.getStackInSlot(0));
-                EnchantmentData enchant = enchantments.get(enchantments.size()-enchantID);
+                List<Map.Entry<Integer, EnchantmentData>> enchantments = EnchantmentRegistry.getPossibleEnchants(this.paymentInv.getStackInSlot(0));
+                if (enchantments.size()-1-enchantID < 0) return false;
+                EnchantmentData enchantment = enchantments.get(enchantments.size()-1-enchantID).getValue();
                 boolean flag = itemstack.getItem() == Items.book;
 
-                if (enchant != null)
+                if (enchantment != null)
                 {
                     if (flag)
                     {
                         itemstack.func_150996_a(Items.enchanted_book);
-                        Items.enchanted_book.addEnchantment(itemstack, enchant);
+                        Items.enchanted_book.addEnchantment(itemstack, enchantment);
                     } else
                     {
-                        itemstack.addEnchantment(enchant.enchantmentobj, enchant.enchantmentLevel);
+                        itemstack.addEnchantment(enchantment.enchantmentobj, enchantment.enchantmentLevel);
                     }
+
+                    this.paymentInv.getStackInSlot(0).stackSize -= enchantments.get(enchantments.size()-1-enchantID).getKey();
+                    if (this.paymentInv.getStackInSlot(0).stackSize <= 0)
+                        this.paymentInv.setInventorySlotContents(0, null);
 
                     this.onCraftMatrixChanged(enchantInv);
                     this.onCraftMatrixChanged(paymentInv);

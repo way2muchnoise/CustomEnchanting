@@ -24,15 +24,15 @@ public class EnchantmentRegistry
         }
     }
 
-    public static List<EnchantmentData> getPossibleEnchants(ItemStack itemStack)
+    public static List<Map.Entry<Integer, EnchantmentData>> getPossibleEnchants(ItemStack itemStack)
     {
-        List<EnchantmentData> data = new ArrayList<EnchantmentData>();
+        List<Map.Entry<Integer, EnchantmentData>> data = new LinkedList<Map.Entry<Integer, EnchantmentData>>();
         if (itemStack != null && itemStack.getItem() != null)
         {
             Map<Integer, EnchantmentData> map = registry.get(itemStack.getItem());
             for (Map.Entry<Integer, EnchantmentData> entry : map.entrySet())
                 if (entry.getKey() <= itemStack.stackSize)
-                    data.add(entry.getValue());
+                    data.add(entry);
         }
         return data;
     }
