@@ -24,7 +24,7 @@ public class BlockCustomEnchantmentTable extends BlockEnchantmentTable
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int int1, float float1, float float2, float float3)
     {
         if (!world.isRemote)
-            player.openGui(CustomEnchanting.INSTANCE, 0, world, x, y ,z);
+            player.openGui(CustomEnchanting.INSTANCE, 0, world, x, y, z);
         return true;
     }
 

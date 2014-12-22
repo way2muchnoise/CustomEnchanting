@@ -3,11 +3,9 @@ package customenchanting.network.message;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import customenchanting.container.ContainerCustomEnchantmentTable;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.inventory.Container;
 import net.minecraft.network.NetHandlerPlayServer;
-import net.minecraft.network.play.client.C11PacketEnchantItem;
 
 public class MessageEnchantment implements IMessage, IMessageHandler<MessageEnchantment, IMessage>
 {

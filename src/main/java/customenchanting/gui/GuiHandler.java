@@ -13,8 +13,8 @@ public class GuiHandler implements IGuiHandler
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity entity = world.getTileEntity(x, y, z);
-        if(entity instanceof TileEntityCustomEnchantmentTable)
-            return new ContainerCustomEnchantmentTable(player.inventory, (TileEntityCustomEnchantmentTable)entity);
+        if (entity instanceof TileEntityCustomEnchantmentTable)
+            return new ContainerCustomEnchantmentTable(player.inventory, (TileEntityCustomEnchantmentTable) entity);
         return null;
     }
 
@@ -22,8 +22,8 @@ public class GuiHandler implements IGuiHandler
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity entity = world.getTileEntity(x, y, z);
-        if(entity instanceof TileEntityCustomEnchantmentTable)
-            return new GuiCustomEnchantmentTable(player.inventory, (TileEntityCustomEnchantmentTable)entity);
+        if (entity instanceof TileEntityCustomEnchantmentTable)
+            return new GuiCustomEnchantmentTable(player.inventory, (TileEntityCustomEnchantmentTable) entity);
         return null;
     }
 }

@@ -1,9 +1,9 @@
 package customenchanting.util;
 
 import cpw.mods.fml.common.FMLLog;
-import org.apache.logging.log4j.Level;
 import customenchanting.config.Settings;
 import customenchanting.reference.Reference;
+import org.apache.logging.log4j.Level;
 
 public class LogHelper
 {

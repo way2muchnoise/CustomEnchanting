@@ -45,7 +45,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
     public GuiCustomEnchantmentTable(InventoryPlayer inv, TileEntityCustomEnchantmentTable table)
     {
         super(new ContainerCustomEnchantmentTable(inv, table));
-        container = (ContainerCustomEnchantmentTable)this.inventorySlots;
+        container = (ContainerCustomEnchantmentTable) this.inventorySlots;
     }
 
     /**
@@ -53,7 +53,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.CustomEnchantmentTable"), 12, 5, 4210752);
+        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.CustomEnchantmentTable"), 7, 4, 4210752);
         this.fontRendererObj.drawString(TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
@@ -120,7 +120,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         float f4 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.25F;
         float f5 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.75F;
         f4 = (f4 - (float) MathHelper.truncateDoubleToInt((double) f4)) * 1.6F - 0.3F;
-        f5 = (f5 - (float)MathHelper.truncateDoubleToInt((double)f5)) * 1.6F - 0.3F;
+        f5 = (f5 - (float) MathHelper.truncateDoubleToInt((double) f5)) * 1.6F - 0.3F;
 
         if (f4 < 0.0F)
         {
@@ -165,32 +165,25 @@ public class GuiCustomEnchantmentTable extends GuiContainer
 
                 int size = enchantments.size();
 
-                if (size-1-id >= 0)
+                if (size - 1 - id >= 0)
                 {
-                    EnchantmentData enchantment = enchantments.get(size-1-id).getValue();
+                    EnchantmentData enchantment = enchantments.get(size - 1 - id).getValue();
                     String s = enchantment.enchantmentobj.getTranslatedName(enchantment.enchantmentLevel);
                     int k1 = 6839882;
 
-                    if (this.mc.thePlayer.experienceLevel < id && !this.mc.thePlayer.capabilities.isCreativeMode)
+                    int l1 = p_146976_2_ - (xMiddle + 60);
+                    int i2 = p_146976_3_ - (yMiddle + 14 + 19 * id);
+
+                    if (l1 >= 0 && i2 >= 0 && l1 < 108 && i2 < 19)
                     {
-                        this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 185, 108, 19);
-                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * id, 104, (k1 & 16711422) >> 1);
+                        this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 204, 108, 19);
+                        k1 = 16777088;
                     } else
                     {
-                        int l1 = p_146976_2_ - (xMiddle + 60);
-                        int i2 = p_146976_3_ - (yMiddle + 14 + 19 * id);
-
-                        if (l1 >= 0 && i2 >= 0 && l1 < 108 && i2 < 19)
-                        {
-                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 204, 108, 19);
-                            k1 = 16777088;
-                        } else
-                        {
-                            this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 166, 108, 19);
-                        }
-
-                        fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * id, 104, k1);
+                        this.drawTexturedModalRect(xMiddle + 60, yMiddle + 14 + 19 * id, 0, 166, 108, 19);
                     }
+
+                    fontRendererObj.drawSplitString(s, xMiddle + 62, yMiddle + 16 + 19 * id, 104, k1);
                 }
             }
         }
@@ -231,8 +224,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         if (flag)
         {
             this.field_147080_z += 0.2F;
-        }
-        else
+        } else
         {
             this.field_147080_z -= 0.2F;
         }

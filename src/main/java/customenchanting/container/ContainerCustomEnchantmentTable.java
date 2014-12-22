@@ -89,8 +89,8 @@ public class ContainerCustomEnchantmentTable extends Container
             if (!table.getWorldObj().isRemote)
             {
                 List<Map.Entry<Integer, EnchantmentData>> enchantments = EnchantmentRegistry.getPossibleEnchants(this.paymentInv.getStackInSlot(0));
-                if (enchantments.size()-1-enchantID < 0) return false;
-                EnchantmentData enchantment = enchantments.get(enchantments.size()-1-enchantID).getValue();
+                if (enchantments.size() - 1 - enchantID < 0) return false;
+                EnchantmentData enchantment = enchantments.get(enchantments.size() - 1 - enchantID).getValue();
                 boolean flag = itemstack.getItem() == Items.book;
 
                 if (enchantment != null)
@@ -104,7 +104,7 @@ public class ContainerCustomEnchantmentTable extends Container
                         itemstack.addEnchantment(enchantment.enchantmentobj, enchantment.enchantmentLevel);
                     }
 
-                    this.paymentInv.getStackInSlot(0).stackSize -= enchantments.get(enchantments.size()-1-enchantID).getKey();
+                    this.paymentInv.getStackInSlot(0).stackSize -= enchantments.get(enchantments.size() - 1 - enchantID).getKey();
                     if (this.paymentInv.getStackInSlot(0).stackSize <= 0)
                         this.paymentInv.setInventorySlotContents(0, null);
 
@@ -114,8 +114,7 @@ public class ContainerCustomEnchantmentTable extends Container
             }
 
             return true;
-        }
-        else
+        } else
         {
             return false;
         }
