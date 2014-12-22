@@ -29,6 +29,8 @@ public class CustomEnchanting
         metadata = MetaData.init(metadata);
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new ConfigHandler());
+
+        PROXY.preInit();
     }
 
     @Mod.EventHandler
