@@ -1,7 +1,5 @@
 package customenchanting.proxy;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import customenchanting.CustomEnchanting;
 import customenchanting.block.BlockCustomEnchantmentTable;
 import customenchanting.enchant.EnchantmentRegistry;
@@ -9,6 +7,8 @@ import customenchanting.gui.GuiHandler;
 import customenchanting.network.MessageHandler;
 import customenchanting.reference.Blocks;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy
 {

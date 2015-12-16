@@ -13,7 +13,7 @@ public class KoalaEnchant extends Enchantment
 
     private KoalaEnchant(int id)
     {
-        super(id, 1, EnumEnchantmentType.armor);
+        super(id, 1, EnumEnchantmentType.ARMOR);
         setName("customEnchanting.koalaEnchant");
     }
 }

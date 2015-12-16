@@ -1,7 +1,5 @@
 package customenchanting.gui;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import customenchanting.container.ContainerCustomEnchantmentTable;
 import customenchanting.enchant.EnchantmentRegistry;
 import customenchanting.network.MessageHandler;
@@ -17,6 +15,8 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;

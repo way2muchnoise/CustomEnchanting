@@ -1,8 +1,8 @@
 package customenchanting.util;
 
-import cpw.mods.fml.common.FMLLog;
 import customenchanting.config.Settings;
 import customenchanting.reference.Reference;
+import net.minecraftforge.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
 public class LogHelper

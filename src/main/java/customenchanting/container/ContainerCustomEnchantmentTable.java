@@ -86,7 +86,7 @@ public class ContainerCustomEnchantmentTable extends Container
 
         if (itemstack != null)
         {
-            if (!table.getWorldObj().isRemote)
+            if (!table.getWorld().isRemote)
             {
                 List<Map.Entry<Integer, EnchantmentData>> enchantments = EnchantmentRegistry.getPossibleEnchants(this.paymentInv.getStackInSlot(0));
                 if (enchantments.size() - 1 - enchantID < 0) return false;
