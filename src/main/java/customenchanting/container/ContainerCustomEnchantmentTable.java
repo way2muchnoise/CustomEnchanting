@@ -97,7 +97,7 @@ public class ContainerCustomEnchantmentTable extends Container
                 {
                     if (flag)
                     {
-                        itemstack.func_150996_a(Items.enchanted_book);
+                        itemstack.setItem(Items.enchanted_book);
                         Items.enchanted_book.addEnchantment(itemstack, enchantment);
                     } else
                     {

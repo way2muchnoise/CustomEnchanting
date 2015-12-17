@@ -1,7 +1,9 @@
 package customenchanting.enchants;
 
+import customenchanting.reference.Reference;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.util.ResourceLocation;
 
 public class KoalaEnchant extends Enchantment
 {
@@ -13,7 +15,7 @@ public class KoalaEnchant extends Enchantment
 
     private KoalaEnchant(int id)
     {
-        super(id, 1, EnumEnchantmentType.ARMOR);
+        super(id, new ResourceLocation(Reference.ID, "koalaEnchant"), 1, EnumEnchantmentType.ARMOR);
         setName("customEnchanting.koalaEnchant");
     }
 }

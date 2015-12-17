@@ -41,10 +41,10 @@ public class MessageEnchantment implements IMessage, IMessageHandler<MessageEnch
     {
         NetHandlerPlayServer server = ctx.getServerHandler();
 
-        server.playerEntity.func_143004_u();
+        server.playerEntity.markPlayerActive();
 
         Container container = server.playerEntity.openContainer;
-        if (container.windowId == message.windowId && container.isPlayerNotUsingContainer(server.playerEntity))
+        if (container.windowId == message.windowId && container.getCanCraft(server.playerEntity))
         {
             container.enchantItem(server.playerEntity, message.buttonId);
             container.detectAndSendChanges();
