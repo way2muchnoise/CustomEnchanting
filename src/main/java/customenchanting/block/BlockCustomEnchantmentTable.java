@@ -18,8 +18,7 @@ public class BlockCustomEnchantmentTable extends BlockEnchantmentTable
     public BlockCustomEnchantmentTable()
     {
         super();
-        this.setBlockName("CustomEnchantmentTable");
-        this.setBlockTextureName(Textures.Block.CUSTOM_ENCHANTMENT_TABLE);
+        this.setUnlocalizedName("CustomEnchantmentTable");
         this.setCreativeTab(CreativeTabs.tabBrewing);
     }
 

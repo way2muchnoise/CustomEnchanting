@@ -21,6 +21,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -69,7 +70,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int x, int y, int button)
+    protected void mouseClicked(int x, int y, int button) throws IOException
     {
         super.mouseClicked(x, y, button);
         int xMiddle = (this.width - this.xSize) / 2;
