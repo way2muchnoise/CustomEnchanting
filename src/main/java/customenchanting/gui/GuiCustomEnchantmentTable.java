@@ -10,6 +10,7 @@ import customenchanting.util.TranslationHelper;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.model.ModelBook;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,7 +19,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
 
 import java.io.IOException;
@@ -31,6 +31,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
 {
     private static final ModelBook modelBook = new ModelBook();
 
+    //TODO: Give these names that make sense
     private float field_147071_v;
     private float field_147069_w;
     private float field_147081_y;
@@ -54,7 +55,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.CustomEnchantmentTable"), 7, 4, 4210752);
+        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.customEnchantmentTable"), 7, 4, 4210752);
         this.fontRendererObj.drawString(TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
@@ -90,34 +91,34 @@ public class GuiCustomEnchantmentTable extends GuiContainer
 
     protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
     {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Gui.GUI_CUSTOM_ENCHANT);
         int xMiddle = (this.width - this.xSize) / 2;
         int yMiddle = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(xMiddle, yMiddle, 0, 0, this.xSize, this.ySize);
-        GL11.glPushMatrix();
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glPushMatrix();
-        GL11.glLoadIdentity();
+        GlStateManager.pushMatrix();
+        GlStateManager.matrixMode(GL11.GL_PROJECTION);
+        GlStateManager.pushMatrix();
+        GlStateManager.loadIdentity();
         ScaledResolution scaledresolution = new ScaledResolution(this.mc);
-        GL11.glViewport((scaledresolution.getScaledWidth() - 320) / 2 * scaledresolution.getScaleFactor(), (scaledresolution.getScaledHeight() - 240) / 2 * scaledresolution.getScaleFactor(), 320 * scaledresolution.getScaleFactor(), 240 * scaledresolution.getScaleFactor());
-        GL11.glTranslatef(-0.34F, 0.23F, 0.0F);
+        GlStateManager.viewport((scaledresolution.getScaledWidth() - 320) / 2 * scaledresolution.getScaleFactor(), (scaledresolution.getScaledHeight() - 240) / 2 * scaledresolution.getScaleFactor(), 320 * scaledresolution.getScaleFactor(), 240 * scaledresolution.getScaleFactor());
+        GlStateManager.translate(-0.34F, 0.23F, 0.0F);
         Project.gluPerspective(90.0F, 1.3333334F, 9.0F, 80.0F);
         float f1 = 1.0F;
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glLoadIdentity();
+        GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+        GlStateManager.loadIdentity();
         RenderHelper.enableStandardItemLighting();
-        GL11.glTranslatef(0.0F, 3.3F, -16.0F);
-        GL11.glScalef(f1, f1, f1);
+        GlStateManager.translate(0.0F, 3.3F, -16.0F);
+        GlStateManager.scale(f1, f1, f1);
         float f2 = 5.0F;
-        GL11.glScalef(f2, f2, f2);
-        GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.scale(f2, f2, f2);
+        GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Minecraft.ENCHANTED_BOOK);
-        GL11.glRotatef(20.0F, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate(20.0F, 1.0F, 0.0F, 0.0F);
         float f3 = this.field_147076_A + (this.field_147080_z - this.field_147076_A) * p_146976_1_;
-        GL11.glTranslatef((1.0F - f3) * 0.2F, (1.0F - f3) * 0.1F, (1.0F - f3) * 0.25F);
-        GL11.glRotatef(-(1.0F - f3) * 90.0F - 90.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+        GlStateManager.translate((1.0F - f3) * 0.2F, (1.0F - f3) * 0.1F, (1.0F - f3) * 0.25F);
+        GlStateManager.rotate(-(1.0F - f3) * 90.0F - 90.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
         float f4 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.25F;
         float f5 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.75F;
         f4 = (f4 - (float) MathHelper.truncateDoubleToInt((double) f4)) * 1.6F - 0.3F;
@@ -143,17 +144,17 @@ public class GuiCustomEnchantmentTable extends GuiContainer
             f5 = 1.0F;
         }
 
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+        GlStateManager.enableRescaleNormal();
         modelBook.render(null, 0.0F, f4, f5, f3, 0.0F, 0.0625F);
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        GlStateManager.disableRescaleNormal();
         RenderHelper.disableStandardItemLighting();
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-        GL11.glViewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
-        GL11.glPopMatrix();
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-        GL11.glPopMatrix();
+        GlStateManager.matrixMode(GL11.GL_PROJECTION);
+        GlStateManager.viewport(0, 0, this.mc.displayWidth, this.mc.displayHeight);
+        GlStateManager.popMatrix();
+        GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+        GlStateManager.popMatrix();
         RenderHelper.disableStandardItemLighting();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         if (this.currentModifier != null && this.currentStack != null)
         {
@@ -162,7 +163,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
             {
                 this.zLevel = 0.0F;
                 this.mc.getTextureManager().bindTexture(Resources.Gui.GUI_CUSTOM_ENCHANT);
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
                 int size = enchantments.size();
 

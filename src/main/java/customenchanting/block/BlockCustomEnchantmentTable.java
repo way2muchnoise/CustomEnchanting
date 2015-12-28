@@ -18,7 +18,7 @@ public class BlockCustomEnchantmentTable extends BlockEnchantmentTable
     public BlockCustomEnchantmentTable()
     {
         super();
-        this.setUnlocalizedName("CustomEnchantmentTable");
+        this.setUnlocalizedName("customEnchantmentTable");
         this.setCreativeTab(CreativeTabs.tabBrewing);
     }
 

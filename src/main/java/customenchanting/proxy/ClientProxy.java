@@ -20,7 +20,7 @@ public class ClientProxy extends CommonProxy
         super.init();
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(
                 Item.getItemFromBlock(Blocks.enchantmentTable), 0,
-                new ModelResourceLocation(Reference.ID, Blocks.enchantmentTable + "_base")
+                new ModelResourceLocation(Reference.ID, Blocks.enchantmentTable.getLocalizedName().substring(5) + "_base")
         );
     }
 

@@ -1,5 +1,5 @@
 customenchanting.config.debug.title=Debug Mode
 customenchanting.config.debug.description=Run the mod in debug mode
 
-tile.CustomEnchantmentTable.name=Custom Enchantment Table
-customenchanting.container.CustomEnchantmentTable=Custom Enchantment
+tile.customEnchantmentTable.name=Custom Enchantment Table
+customenchanting.container.customEnchantmentTable=Custom Enchantment
