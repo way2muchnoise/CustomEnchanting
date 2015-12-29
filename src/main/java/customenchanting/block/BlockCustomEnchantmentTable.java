@@ -1,7 +1,6 @@
 package customenchanting.block;
 
 import customenchanting.CustomEnchanting;
-import customenchanting.reference.Textures;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 import net.minecraft.block.BlockEnchantmentTable;
 import net.minecraft.block.state.IBlockState;

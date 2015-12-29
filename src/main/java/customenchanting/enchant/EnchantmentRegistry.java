@@ -38,6 +38,11 @@ public class EnchantmentRegistry
         return data;
     }
 
+    protected static Map<Item, Map<Integer, EnchantmentData>> getRegistry()
+    {
+        return registry;
+    }
+
     public static void init()
     {
         addEnchant(new ItemStack(Items.leather_chestplate, 1), new EnchantmentData(Enchantment.protection, 1));

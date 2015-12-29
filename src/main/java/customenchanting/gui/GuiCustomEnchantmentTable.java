@@ -55,8 +55,8 @@ public class GuiCustomEnchantmentTable extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.customEnchantmentTable"), 7, 4, 4210752);
-        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        drawString(this.fontRendererObj, TranslationHelper.translateToLocal("customenchanting.container.customEnchantmentTable"), 7, 4, 4210752);
+        drawString(this.fontRendererObj, TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**
@@ -89,7 +89,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         }
     }
 
-    protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Gui.GUI_CUSTOM_ENCHANT);
@@ -115,12 +115,12 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(Resources.Minecraft.ENCHANTED_BOOK);
         GlStateManager.rotate(20.0F, 1.0F, 0.0F, 0.0F);
-        float f3 = this.field_147076_A + (this.field_147080_z - this.field_147076_A) * p_146976_1_;
+        float f3 = this.field_147076_A + (this.field_147080_z - this.field_147076_A) * partialTicks;
         GlStateManager.translate((1.0F - f3) * 0.2F, (1.0F - f3) * 0.1F, (1.0F - f3) * 0.25F);
         GlStateManager.rotate(-(1.0F - f3) * 90.0F - 90.0F, 0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
-        float f4 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.25F;
-        float f5 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * p_146976_1_ + 0.75F;
+        float f4 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * partialTicks + 0.25F;
+        float f5 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * partialTicks + 0.75F;
         f4 = (f4 - (float) MathHelper.truncateDoubleToInt((double) f4)) * 1.6F - 0.3F;
         f5 = (f5 - (float) MathHelper.truncateDoubleToInt((double) f5)) * 1.6F - 0.3F;
 
@@ -173,8 +173,8 @@ public class GuiCustomEnchantmentTable extends GuiContainer
                     String s = enchantment.enchantmentobj.getTranslatedName(enchantment.enchantmentLevel);
                     int k1 = 6839882;
 
-                    int l1 = p_146976_2_ - (xMiddle + 60);
-                    int i2 = p_146976_3_ - (yMiddle + 14 + 19 * id);
+                    int l1 = mouseX - (xMiddle + 60);
+                    int i2 = mouseY - (yMiddle + 14 + 19 * id);
 
                     if (l1 >= 0 && i2 >= 0 && l1 < 108 && i2 < 19)
                     {
