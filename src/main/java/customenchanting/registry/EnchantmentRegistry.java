@@ -1,4 +1,4 @@
-package customenchanting.enchant;
+package customenchanting.registry;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;

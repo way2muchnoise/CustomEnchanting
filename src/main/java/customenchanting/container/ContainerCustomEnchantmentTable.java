@@ -1,6 +1,6 @@
 package customenchanting.container;
 
-import customenchanting.enchant.EnchantmentRegistry;
+import customenchanting.registry.EnchantmentRegistry;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.EntityPlayer;

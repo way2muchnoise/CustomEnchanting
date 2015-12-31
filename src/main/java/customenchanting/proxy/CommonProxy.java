@@ -2,7 +2,8 @@ package customenchanting.proxy;
 
 import customenchanting.CustomEnchanting;
 import customenchanting.block.BlockCustomEnchantmentTable;
-import customenchanting.enchant.EnchantmentRegistry;
+import customenchanting.registry.EnchantmentIO;
+import customenchanting.registry.EnchantmentRegistry;
 import customenchanting.gui.GuiHandler;
 import customenchanting.network.MessageHandler;
 import customenchanting.reference.Blocks;
@@ -30,5 +31,6 @@ public class CommonProxy
     public void postInit()
     {
         EnchantmentRegistry.init();
+        EnchantmentIO.writeToFile("test.json");
     }
 }

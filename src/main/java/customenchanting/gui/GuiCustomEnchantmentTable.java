@@ -1,7 +1,7 @@
 package customenchanting.gui;
 
 import customenchanting.container.ContainerCustomEnchantmentTable;
-import customenchanting.enchant.EnchantmentRegistry;
+import customenchanting.registry.EnchantmentRegistry;
 import customenchanting.network.MessageHandler;
 import customenchanting.network.message.MessageEnchantment;
 import customenchanting.reference.Resources;
