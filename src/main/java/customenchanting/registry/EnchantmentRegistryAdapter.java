@@ -5,7 +5,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.io.IOException;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class EnchantmentRegistryAdapter extends TypeAdapter<Map<Item, Map<Intege
         for (Map.Entry<Item, Map<Integer, EnchantmentData>> entry : value.entrySet())
         {
             out.beginObject();
-            out.name("item").value(GameRegistry.findUniqueIdentifierFor(entry.getKey()).toString());
+            out.name("item").value(entry.getKey().getRegistryName().toString());
             out.name("enchants").beginArray();
             for (Map.Entry<Integer, EnchantmentData> enchantData : entry.getValue().entrySet())
                 out.name("" + entry.getKey()).value(enchantData.getValue().enchantmentobj.getName() + ":" + enchantData.getValue().enchantmentLevel);

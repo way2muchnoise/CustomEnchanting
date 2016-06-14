@@ -11,7 +11,7 @@ import java.util.*;
 
 public class EnchantmentRegistry
 {
-    private static Map<Item, Map<Integer, EnchantmentData>> registry = new HashMap<Item, Map<Integer, EnchantmentData>>();
+    private static Map<Item, Map<Integer, EnchantmentData>> registry = new HashMap<>();
 
     public static void addEnchant(ItemStack itemStack, EnchantmentData data)
     {
@@ -19,7 +19,7 @@ public class EnchantmentRegistry
         {
             Map<Integer, EnchantmentData> map = registry.get(itemStack.getItem());
             if (map == null)
-                map = new TreeMap<Integer, EnchantmentData>();
+                map = new TreeMap<>();
             map.put(itemStack.stackSize, data);
             registry.put(itemStack.getItem(), map);
         }
@@ -27,7 +27,7 @@ public class EnchantmentRegistry
 
     public static List<Map.Entry<Integer, EnchantmentData>> getPossibleEnchants(ItemStack itemStack)
     {
-        List<Map.Entry<Integer, EnchantmentData>> data = new LinkedList<Map.Entry<Integer, EnchantmentData>>();
+        List<Map.Entry<Integer, EnchantmentData>> data = new LinkedList<>();
         if (itemStack != null && itemStack.getItem() != null)
         {
             Map<Integer, EnchantmentData> map = registry.get(itemStack.getItem());
@@ -45,20 +45,36 @@ public class EnchantmentRegistry
 
     public static void init()
     {
-        addEnchant(new ItemStack(Items.leather_chestplate, 1), new EnchantmentData(Enchantment.protection, 1));
-        addEnchant(new ItemStack(Items.iron_chestplate, 1), new EnchantmentData(Enchantment.protection, 2));
-        addEnchant(new ItemStack(Items.golden_chestplate, 1), new EnchantmentData(Enchantment.protection, 3));
-        addEnchant(new ItemStack(Items.diamond_chestplate, 1), new EnchantmentData(Enchantment.protection, 4));
-        addEnchant(new ItemStack(Items.feather, 8), new EnchantmentData(Enchantment.featherFalling, 1));
-        addEnchant(new ItemStack(Items.feather, 16), new EnchantmentData(Enchantment.featherFalling, 2));
-        addEnchant(new ItemStack(Items.feather, 32), new EnchantmentData(Enchantment.featherFalling, 3));
-        addEnchant(new ItemStack(Items.feather, 64), new EnchantmentData(Enchantment.featherFalling, 4));
-        addEnchant(new ItemStack(Blocks.tnt, 1), new EnchantmentData(Enchantment.blastProtection, 1));
-        addEnchant(new ItemStack(Blocks.tnt, 4), new EnchantmentData(Enchantment.blastProtection, 2));
-        addEnchant(new ItemStack(Blocks.tnt, 8), new EnchantmentData(Enchantment.blastProtection, 3));
-        addEnchant(new ItemStack(Blocks.tnt, 12), new EnchantmentData(Enchantment.blastProtection, 4));
-        addEnchant(new ItemStack(Blocks.cactus, 16), new EnchantmentData(Enchantment.thorns, 1));
-        addEnchant(new ItemStack(Blocks.cactus, 32), new EnchantmentData(Enchantment.thorns, 2));
-        addEnchant(new ItemStack(Blocks.cactus, 64), new EnchantmentData(Enchantment.thorns, 3));
+        Enchantment protection = Enchantment.getEnchantmentByLocation("protection");
+        if (protection != null)
+        {
+            addEnchant(new ItemStack(Items.LEATHER_CHESTPLATE, 1), new EnchantmentData(protection, 1));
+            addEnchant(new ItemStack(Items.IRON_CHESTPLATE, 1), new EnchantmentData(protection, 2));
+            addEnchant(new ItemStack(Items.GOLDEN_CHESTPLATE, 1), new EnchantmentData(protection, 3));
+            addEnchant(new ItemStack(Items.DIAMOND_CHESTPLATE, 1), new EnchantmentData(protection, 4));
+        }
+        Enchantment featherFalling = Enchantment.getEnchantmentByLocation("feather_falling");
+        if (featherFalling != null)
+        {
+            addEnchant(new ItemStack(Items.FEATHER, 8), new EnchantmentData(featherFalling, 1));
+            addEnchant(new ItemStack(Items.FEATHER, 16), new EnchantmentData(featherFalling, 2));
+            addEnchant(new ItemStack(Items.FEATHER, 32), new EnchantmentData(featherFalling, 3));
+            addEnchant(new ItemStack(Items.FEATHER, 64), new EnchantmentData(featherFalling, 4));
+        }
+        Enchantment blastProtection = Enchantment.getEnchantmentByLocation("blast_protection");
+        if (blastProtection != null)
+        {
+            addEnchant(new ItemStack(Blocks.TNT, 1), new EnchantmentData(blastProtection, 1));
+            addEnchant(new ItemStack(Blocks.TNT, 4), new EnchantmentData(blastProtection, 2));
+            addEnchant(new ItemStack(Blocks.TNT, 8), new EnchantmentData(blastProtection, 3));
+            addEnchant(new ItemStack(Blocks.TNT, 12), new EnchantmentData(blastProtection, 4));
+        }
+        Enchantment thorns = Enchantment.getEnchantmentByLocation("thorns");
+        if (thorns != null)
+        {
+            addEnchant(new ItemStack(Blocks.CACTUS, 16), new EnchantmentData(thorns, 1));
+            addEnchant(new ItemStack(Blocks.CACTUS, 32), new EnchantmentData(thorns, 2));
+            addEnchant(new ItemStack(Blocks.CACTUS, 64), new EnchantmentData(thorns, 3));
+        }
     }
 }

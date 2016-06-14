@@ -28,25 +28,21 @@ public class ConfigHandler
     @SubscribeEvent
     public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        if (event.modID.equalsIgnoreCase(Reference.ID))
-        {
+        if (event.getModID().equalsIgnoreCase(Reference.ID))
             loadConfig();
-        }
     }
 
     private static void loadConfig()
     {
         Settings.debugMode = config.getBoolean(TranslationHelper.translateToLocal("wailafeatures.config.debug.title"), Configuration.CATEGORY_GENERAL, false, TranslationHelper.translateToLocal("wailafeatures.config.debug.description"));
         if (config.hasChanged())
-        {
             config.save();
-        }
     }
 
     @SuppressWarnings("unchecked")
     public static List<IConfigElement> getConfigElements()
     {
-        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        List<IConfigElement> list = new ArrayList<>();
         list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
         return list;
     }

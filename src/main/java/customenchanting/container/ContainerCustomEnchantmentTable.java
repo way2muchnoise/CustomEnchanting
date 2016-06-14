@@ -91,14 +91,14 @@ public class ContainerCustomEnchantmentTable extends Container
                 List<Map.Entry<Integer, EnchantmentData>> enchantments = EnchantmentRegistry.getPossibleEnchants(this.paymentInv.getStackInSlot(0));
                 if (enchantments.size() - 1 - enchantID < 0) return false;
                 EnchantmentData enchantment = enchantments.get(enchantments.size() - 1 - enchantID).getValue();
-                boolean flag = itemstack.getItem() == Items.book;
+                boolean flag = itemstack.getItem() == Items.BOOK;
 
                 if (enchantment != null)
                 {
                     if (flag)
                     {
-                        itemstack.setItem(Items.enchanted_book);
-                        Items.enchanted_book.addEnchantment(itemstack, enchantment);
+                        itemstack.setItem(Items.ENCHANTED_BOOK);
+                        Items.ENCHANTED_BOOK.addEnchantment(itemstack, enchantment);
                     } else
                     {
                         itemstack.addEnchantment(enchantment.enchantmentobj, enchantment.enchantmentLevel);
