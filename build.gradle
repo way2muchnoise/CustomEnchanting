@@ -7,9 +7,14 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
+
+plugins {
+    id "com.matthewprenger.cursegradle" version "1.0.7"
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
@@ -18,41 +23,38 @@ repositories {
         name = "forge"
         url = "http://files.minecraftforge.net/maven"
     }
-    maven { // the repo from which to get NEI and stuff
-        name 'CB Repo'
-        url "http://chickenbones.net/maven"
-    }
     maven {
-        name "Waila Mobius Repo"
-        url "http://mobiusstrip.eu/maven"
+        name = "jei"
+        url =  "http://dvs1.progwml6.com/files/maven"
     }
-    ivy {
-        name 'FMP'
-        artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
-    }
-
 }
 
 dependencies {
-    //compile "codechicken:NotEnoughItems:${version_minecraft}-${version_nei}:dev"
-    //compile "codechicken:CodeChickenLib:${version_minecraft}-${version_cclib}:dev"
-    //compile "codechicken:CodeChickenCore:${version_minecraft}-${version_cccore}:dev"
-    //compile "mcp.mobius.waila:Waila:${waila_version}_${version_minecraft}:dev"
-
-	compile fileTree(dir: 'lib', include: '*.jar')
+    deobfCompile "mezz.jei:jei_${version_minecraft}:${version_jei}"
+    compile fileTree(dir: 'lib', include: '*.jar')
 }
 
-group = "CustomEnchanting"
-archivesBaseName = "CustomEnchanting"
+group = "customenchanting"
+archivesBaseName = "CustomEnchanting-" + version_minecraft
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = version_major + '.' + version_minor + '.' + version_revis
+
+//adds the build number to the end of the version string if on a build server
+if (System.getenv().DRONE_BUILD_NUMBER != null) {
+    version += ".${System.getenv().DRONE_BUILD_NUMBER}"
+}
 
 minecraft {
     version = "${version_minecraft}-${version_forge}"
     mappings = "${version_mappings}"
     runDir = "run"
 
-    replace "@MAJOR@", version_major
-    replace "@MINOR@", version_minor
-    replace "@REVIS@", version_revis
+    useDepAts = true
+
+    replace "@VERSION@", project.version
 
     replaceIn "reference/Reference.java"
     replaceIn "package-info.java"
@@ -68,12 +70,12 @@ processResources {
     }
 
     from(sourceSets.main.resources.srcDirs) { exclude '**/*.info' }
+
+    // Move access transformers to META-INF
+    rename '(.+_at.cfg)', 'META-INF/$1'
 }
 
-version = "${version_minecraft}-${version_major}.${version_minor}.${version_revis}"
-
 jar {
-    from "build/sources/main"
     destinationDir = file (rootProject.getRootDir().getPath() + '/output')
 }
 
@@ -84,12 +86,43 @@ task deobfJar(type: Jar) {
 }
 
 task sourcesJar(type: Jar, dependsOn: 'sourceMainJava') {
-    from "build/sources/java"
-    from "build/resources/main/java"
+    from "build/sources/main"
+    from "build/resources/main"
     classifier "sources"
     destinationDir = file (rootProject.getRootDir().getPath() + '/output')
 }
 
+task apiJar(type: Jar, dependsOn: 'sourceMainJava') {
+    from "build/sources/main/java/customenchanting/api"
+    classifier "api"
+    destinationDir = file (rootProject.getRootDir().getPath() + '/output')
+}
+
 artifacts {
-    archives sourcesJar, deobfJar
+    archives deobfJar, sourcesJar, apiJar
+}
+
+curseforge {
+    apiKey = System.getenv().CURSE_KEY == null ? '0' : System.getenv().CURSE_KEY
+    project {
+        id = curse_project_id
+        changelog = "git log -n1 --pretty=format:\"[%h](https://github.com/${repo}/commit/%H) %cn: %s\"".execute().text.trim()
+        changelogType = 'markdown'
+        releaseType =  'alpha'
+        mainArtifact (jar) {
+            displayName = "${jar.archiveName}".replace(".jar", "")
+            relations {
+                requiredLibrary 'just-enough-items-jei'
+            }
+        }
+        addArtifact (deobfJar) {
+            displayName = "${deobfJar.archiveName}".replace(".jar", "")
+        }
+        addArtifact (sourcesJar) {
+            displayName = "${sourcesJar.archiveName}".replace(".jar", "")
+        }
+        addArtifact (apiJar) {
+            displayName = "${apiJar.archiveName}".replace(".jar", "")
+        }
+    }
 }
