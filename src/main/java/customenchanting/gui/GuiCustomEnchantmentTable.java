@@ -55,8 +55,8 @@ public class GuiCustomEnchantmentTable extends GuiContainer
      */
     protected void drawGuiContainerForegroundLayer(int x, int y)
     {
-        drawString(this.fontRendererObj, TranslationHelper.translateToLocal("customenchanting.container.customEnchantmentTable"), 7, 4, 4210752);
-        drawString(this.fontRendererObj, TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
+        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("customenchanting.container.customEnchantmentTable"), 7, 4, 4210752);
+        this.fontRendererObj.drawString(TranslationHelper.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
 
     /**

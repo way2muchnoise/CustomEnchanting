@@ -2,11 +2,11 @@ package customenchanting.proxy;
 
 import customenchanting.CustomEnchanting;
 import customenchanting.block.BlockCustomEnchantmentTable;
+import customenchanting.reference.Blocks;
 import customenchanting.registry.EnchantmentIO;
 import customenchanting.registry.EnchantmentRegistry;
 import customenchanting.gui.GuiHandler;
 import customenchanting.network.MessageHandler;
-import customenchanting.reference.Blocks;
 import customenchanting.tileentity.TileEntityCustomEnchantmentTable;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -16,10 +16,7 @@ public class CommonProxy
     public void preInit()
     {
         MessageHandler.init();
-
-        Blocks.enchantmentTable = new BlockCustomEnchantmentTable();
-        GameRegistry.registerBlock(Blocks.enchantmentTable, Blocks.enchantmentTable.getUnlocalizedName());
-
+        Blocks.init();
         GameRegistry.registerTileEntity(TileEntityCustomEnchantmentTable.class, "customEnchantmentTable");
     }
 
