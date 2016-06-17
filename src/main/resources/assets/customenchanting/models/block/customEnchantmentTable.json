@@ -2,11 +2,8 @@
   "parent": "block/enchanting_table_base",
   "textures": {
     "particle": "customenchanting:blocks/customEnchantmentTable_side",
-    "down": "customenchanting:blocks/customEnchantmentTable_bottom",
-    "up": "customenchanting:blocks/customEnchantmentTable_top",
-    "east": "customenchanting:blocks/customEnchantmentTable_side",
-    "west": "customenchanting:blocks/customEnchantmentTable_side",
-    "north": "customenchanting:blocks/customEnchantmentTable_side",
-    "south": "customenchanting:blocks/customEnchantmentTable_side"
+    "bottom": "customenchanting:blocks/customEnchantmentTable_bottom",
+    "top": "customenchanting:blocks/customEnchantmentTable_top",
+    "side": "customenchanting:blocks/customEnchantmentTable_side"
   }
 }
