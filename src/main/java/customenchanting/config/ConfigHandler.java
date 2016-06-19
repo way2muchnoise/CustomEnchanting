@@ -34,7 +34,7 @@ public class ConfigHandler
 
     private static void loadConfig()
     {
-        Settings.debugMode = config.getBoolean(TranslationHelper.translateToLocal("wailafeatures.config.debug.title"), Configuration.CATEGORY_GENERAL, false, TranslationHelper.translateToLocal("wailafeatures.config.debug.description"));
+        Settings.debugMode = config.getBoolean(TranslationHelper.translateToLocal("customenchanting.config.debug.title"), Configuration.CATEGORY_GENERAL, false, TranslationHelper.translateToLocal("customenchanting.config.debug.description"));
         if (config.hasChanged())
             config.save();
     }
