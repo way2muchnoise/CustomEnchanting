@@ -1,7 +1,6 @@
 package customenchanting.proxy;
 
 import customenchanting.CustomEnchanting;
-import customenchanting.block.BlockCustomEnchantmentTable;
 import customenchanting.reference.Blocks;
 import customenchanting.registry.EnchantmentIO;
 import customenchanting.registry.EnchantmentRegistry;

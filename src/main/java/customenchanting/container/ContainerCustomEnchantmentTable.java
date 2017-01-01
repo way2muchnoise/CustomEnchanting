@@ -84,7 +84,7 @@ public class ContainerCustomEnchantmentTable extends Container
     {
         ItemStack itemstack = this.enchantInv.getStackInSlot(0);
 
-        if (itemstack != null)
+        if (!itemstack.isEmpty())
         {
             if (!table.getWorld().isRemote)
             {
@@ -97,16 +97,16 @@ public class ContainerCustomEnchantmentTable extends Container
                 {
                     if (flag)
                     {
-                        itemstack.setItem(Items.ENCHANTED_BOOK);
+                        itemstack = new ItemStack(Items.ENCHANTED_BOOK);
                         Items.ENCHANTED_BOOK.addEnchantment(itemstack, enchantment);
                     } else
                     {
                         itemstack.addEnchantment(enchantment.enchantmentobj, enchantment.enchantmentLevel);
                     }
 
-                    this.paymentInv.getStackInSlot(0).stackSize -= enchantments.get(enchantments.size() - 1 - enchantID).getKey();
-                    if (this.paymentInv.getStackInSlot(0).stackSize <= 0)
-                        this.paymentInv.setInventorySlotContents(0, null);
+                    this.paymentInv.getStackInSlot(0).shrink(enchantments.get(enchantments.size() - 1 - enchantID).getKey());
+                    if (this.paymentInv.getStackInSlot(0).getCount() <= 0)
+                        this.paymentInv.setInventorySlotContents(0, ItemStack.EMPTY);
 
                     this.onCraftMatrixChanged(enchantInv);
                     this.onCraftMatrixChanged(paymentInv);

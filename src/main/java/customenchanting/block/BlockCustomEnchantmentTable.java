@@ -8,9 +8,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBanner;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,8 +27,8 @@ public class BlockCustomEnchantmentTable extends BlockEnchantmentTable
     public BlockCustomEnchantmentTable()
     {
         super();
-        this.setUnlocalizedName("customEnchantmentTable");
-        this.setRegistryName("customEnchantmentTable");
+        this.setUnlocalizedName("custom_enchantment_table");
+        this.setRegistryName("custom_enchantment_table");
         this.setCreativeTab(CreativeTabs.BREWING);
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
@@ -43,9 +41,9 @@ public class BlockCustomEnchantmentTable extends BlockEnchantmentTable
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World world, @Nullable BlockPos pos, IBlockState state, @Nullable EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
     {
-        if (!world.isRemote)
+        if (!world.isRemote && pos != null && player != null)
             player.openGui(CustomEnchanting.INSTANCE, 0, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }

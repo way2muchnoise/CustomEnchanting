@@ -48,6 +48,8 @@ public class GuiCustomEnchantmentTable extends GuiContainer
     {
         super(new ContainerCustomEnchantmentTable(inv, table));
         container = (ContainerCustomEnchantmentTable) this.inventorySlots;
+        currentStack = ItemStack.EMPTY;
+        currentModifier = ItemStack.EMPTY;
     }
 
     /**

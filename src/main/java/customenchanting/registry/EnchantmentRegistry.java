@@ -15,12 +15,12 @@ public class EnchantmentRegistry
 
     public static void addEnchant(ItemStack itemStack, EnchantmentData data)
     {
-        if (itemStack != null && data != null && itemStack.getItem() != null)
+        if (itemStack != null && data != null && !itemStack.isEmpty())
         {
             Map<Integer, EnchantmentData> map = registry.get(itemStack.getItem());
             if (map == null)
                 map = new TreeMap<>();
-            map.put(itemStack.stackSize, data);
+            map.put(itemStack.getCount(), data);
             registry.put(itemStack.getItem(), map);
         }
     }
@@ -28,11 +28,11 @@ public class EnchantmentRegistry
     public static List<Map.Entry<Integer, EnchantmentData>> getPossibleEnchants(ItemStack itemStack)
     {
         List<Map.Entry<Integer, EnchantmentData>> data = new LinkedList<>();
-        if (itemStack != null && itemStack.getItem() != null)
+        if (itemStack != null && !itemStack.isEmpty())
         {
             Map<Integer, EnchantmentData> map = registry.get(itemStack.getItem());
             for (Map.Entry<Integer, EnchantmentData> entry : map.entrySet())
-                if (entry.getKey() <= itemStack.stackSize)
+                if (entry.getKey() <= itemStack.getCount())
                     data.add(entry);
         }
         return data;

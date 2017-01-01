@@ -1,9 +1,0 @@
-{
-  "parent": "block/enchanting_table_base",
-  "textures": {
-    "particle": "customenchanting:blocks/customEnchantmentTable_side",
-    "bottom": "customenchanting:blocks/customEnchantmentTable_bottom",
-    "top": "customenchanting:blocks/customEnchantmentTable_top",
-    "side": "customenchanting:blocks/customEnchantmentTable_side"
-  }
-}
