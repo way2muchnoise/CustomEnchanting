@@ -82,7 +82,7 @@ public class GuiCustomEnchantmentTable extends GuiContainer
             int posX = x - (xMiddle + 60);
             int posY = y - (yMiddle + 14 + 19 * buttonId);
 
-            if (posX >= 0 && posY >= 0 && posX < 108 && posY < 19 && this.container.enchantItem(this.mc.thePlayer, buttonId))
+            if (posX >= 0 && posY >= 0 && posX < 108 && posY < 19 && this.container.enchantItem(this.mc.player, buttonId))
             {
                 MessageHandler.INSTANCE.sendToServer(new MessageEnchantment(this.container.windowId, buttonId));
             }
@@ -121,8 +121,8 @@ public class GuiCustomEnchantmentTable extends GuiContainer
         GlStateManager.rotate(180.0F, 1.0F, 0.0F, 0.0F);
         float f4 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * partialTicks + 0.25F;
         float f5 = this.field_147069_w + (this.field_147071_v - this.field_147069_w) * partialTicks + 0.75F;
-        f4 = (f4 - (float) MathHelper.truncateDoubleToInt((double) f4)) * 1.6F - 0.3F;
-        f5 = (f5 - (float) MathHelper.truncateDoubleToInt((double) f5)) * 1.6F - 0.3F;
+        f4 = (f4 - (float) MathHelper.fastFloor((double) f4)) * 1.6F - 0.3F;
+        f5 = (f5 - (float) MathHelper.fastFloor((double) f5)) * 1.6F - 0.3F;
 
         if (f4 < 0.0F)
         {
